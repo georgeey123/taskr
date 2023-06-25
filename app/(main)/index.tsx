@@ -25,7 +25,7 @@ export default function Page() {
         Icon={Plus}
         size={32}
         iconClassName="text-white"
-        className="absolute bottom-6 right-6 w-16 h-16 bg-slate-600 items-center justify-center rounded-full"
+        className="absolute bottom-6 right-6 w-16 h-16 bg-sky-500 items-center justify-center rounded-full"
         onPress={() => router.push("add_list")}
       />
     </View>
