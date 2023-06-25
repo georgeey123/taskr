@@ -1,6 +1,7 @@
 import React from "react";
-import { Text, View } from "../../utils/tailwind";
-import { MoreVertical } from "lucide-react-native";
+import { Pressable, Text, View } from "../../utils/ReactTailwind";
+import { ChevronLeft, MoreVertical } from "lucide-react-native";
+import { useNavigation } from "expo-router";
 
 const Header = () => {
   return (
@@ -15,6 +16,33 @@ const Header = () => {
           className="font-bold text-4xl tracking-wider"
         >
           Taskr
+        </Text>
+      </View>
+    </View>
+  );
+};
+
+export const HeaderWithBack = ({ title = "" }) => {
+  const { goBack } = useNavigation();
+  return (
+    <View className="py-2 px-2 gap-4">
+      <View className="flex-row h-12 items-center justify-between">
+        <Pressable onPress={() => goBack()} className="rounded-md p-1.5">
+          <ChevronLeft size={28} className="text-black" />
+        </Pressable>
+        {/* <Text style={{ fontFamily: "Nunito_700Bold" }} className="text-base">
+          {title}
+        </Text> */}
+        <Pressable className="rounded-md p-1.5">
+          <MoreVertical className="text-black" />
+        </Pressable>
+      </View>
+      <View className="px-2">
+        <Text
+          style={{ fontFamily: "Nunito_700Bold" }}
+          className="font-bold text-2xl tracking-wider"
+        >
+          {title}
         </Text>
       </View>
     </View>

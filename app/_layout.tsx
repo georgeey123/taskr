@@ -8,6 +8,9 @@ import {
 } from "@expo-google-fonts/inter";
 import { Poppins_700Bold } from "@expo-google-fonts/poppins";
 import { Nunito_500Medium, Nunito_700Bold } from "@expo-google-fonts/nunito";
+import { SafeAreaView } from "../src/utils/ReactTailwind";
+import { Provider } from "react-redux";
+import store from "../src/redux";
 
 export const unstable_settings = {
   initialRouteName: "index",
@@ -29,11 +32,22 @@ export default function Layout() {
   }
 
   return (
-    <Stack
-      screenOptions={{
-        headerShown: false,
-      }}
-      initialRouteName="index"
-    />
+    <Provider store={store}>
+      <SafeAreaView className="flex-1 bg-[#F2F2F2]">
+        <Stack
+          screenOptions={{
+            headerShown: false,
+          }}
+          initialRouteName="index"
+        >
+          <Stack.Screen
+            name="add_list"
+            options={{
+              presentation: "modal",
+            }}
+          />
+        </Stack>
+      </SafeAreaView>
+    </Provider>
   );
 }
