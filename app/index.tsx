@@ -1,9 +1,11 @@
-import { Text, View } from "@/utils/ReactTailwind";
-import Header from "@/components/layout/header";
-import { FlatList, Pressable } from "react-native";
+import { View } from "@/utils/ReactTailwind";
+import { FlatList } from "react-native";
 import ListItem from "@/components/main/listItem";
 import { useRouter } from "expo-router";
 import { useAppSelector } from "@/hooks";
+import { Plus } from "lucide-react-native";
+import { Header } from "@/components/layout/headers";
+import { IconButton } from "@/components/buttons";
 
 export default function Page() {
   const router = useRouter();
@@ -19,16 +21,13 @@ export default function Page() {
           keyExtractor={(item) => item.id}
         ></FlatList>
       </View>
-      <Pressable onPress={() => router.push("add_list")}>
-        <View className="absolute bottom-6 right-6 w-[150px] flex-row h-14 bg-slate-600 items-center justify-center rounded-lg">
-          <Text
-            style={{ fontFamily: "Nunito_500Medium" }}
-            className="text-white font-medium text-xl"
-          >
-            Add List
-          </Text>
-        </View>
-      </Pressable>
+      <IconButton
+        Icon={Plus}
+        size={32}
+        iconClassName="text-white"
+        className="absolute bottom-6 right-6 w-16 h-16 bg-slate-600 items-center justify-center rounded-full"
+        onPress={() => router.push("add_list")}
+      />
     </View>
     // </SafeAreaView>
   );

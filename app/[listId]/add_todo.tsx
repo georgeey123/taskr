@@ -3,13 +3,14 @@ import { Text, View, TextInput, Pressable } from "@/utils/ReactTailwind";
 import classNames from "classnames";
 import { SCREEN_WIDTH } from "@/constants";
 import { KeyboardAvoidingView, Platform } from "react-native";
-import { useRouter } from "expo-router";
+import { useRouter, useSearchParams } from "expo-router";
 import { useAppDispatch } from "@/hooks";
 import { action } from "@/redux";
 
-const AddList = () => {
+const AddTodo = () => {
   const [title, setTitle] = useState("");
   const router = useRouter();
+  const { listId } = useSearchParams();
   const dispatch = useAppDispatch();
 
   return (
@@ -26,12 +27,12 @@ const AddList = () => {
             "p-4"
           )}
         >
-          <Text className="text-2xl mb-4">Add List</Text>
+          <Text className="text-2xl mb-4">Add Todo</Text>
 
           <View className="h-12 pl-4 mb-4 flex-row items-center border border-slate-300 rounded-md ">
             <TextInput
               className="text-lg"
-              placeholder="List Title"
+              placeholder="Todo Title"
               value={title}
               onChangeText={(text) => setTitle(text)}
             />
@@ -47,7 +48,12 @@ const AddList = () => {
             </Pressable>
             <Pressable
               onPress={() => {
-                dispatch(action.lists.addList(title));
+                dispatch(
+                  action.todos.addTodo({
+                    title,
+                    listID: listId as string,
+                  })
+                );
                 router.back();
               }}
               className="h-14 ml-2 flex-1 items-center justify-center border border-slate-600"
@@ -63,4 +69,4 @@ const AddList = () => {
   );
 };
 
-export default AddList;
+export default AddTodo;

@@ -1,10 +1,10 @@
 import React from "react";
-import { View } from "@/utils/ReactTailwind";
+import { Text, View } from "@/utils/ReactTailwind";
 import { useSearchParams } from "expo-router";
-import { HeaderWithBack } from "@/components/layout/header";
 import TodoItem from "@/components/Todo/todoItem";
 import { FlatList } from "react-native";
 import { useAppSelector } from "@/hooks";
+import { HeaderWithBack } from "@/components/layout/headers";
 
 const Lists = () => {
   const { listId } = useSearchParams();
@@ -17,9 +17,26 @@ const Lists = () => {
   const ListTodosDone = ListTodos.filter((todo) => todo.isDone);
   const ListTodosNotDone = ListTodos.filter((todo) => !todo.isDone);
 
+  if (SelectedList === undefined) {
+    return (
+      <View className="flex-1">
+        <HeaderWithBack
+          List={{
+            id: "",
+            title: "",
+          }}
+        />
+        <View className="flex-1 items-center justify-center">
+          <Text className="text-3xl">Oops</Text>
+          <Text className="text-xl">List not found</Text>
+        </View>
+      </View>
+    );
+  }
+
   return (
     <View className="flex-1">
-      <HeaderWithBack title={SelectedList.title} />
+      <HeaderWithBack List={SelectedList} />
       <View className="relative flex-1 px-4 pt-2">
         <FlatList
           style={{ paddingBottom: 200 }}
