@@ -43,7 +43,7 @@ export default function Layout() {
           <Stack.Screen
             name="add_list"
             options={{
-              presentation: "modal",
+              presentation: "containedTransparentModal",
             }}
           />
         </Stack>

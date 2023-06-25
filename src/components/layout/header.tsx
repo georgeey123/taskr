@@ -1,6 +1,6 @@
 import React from "react";
 import { Pressable, Text, View } from "../../utils/ReactTailwind";
-import { ChevronLeft, MoreVertical } from "lucide-react-native";
+import { ChevronLeft, MoreVertical, Plus } from "lucide-react-native";
 import { useNavigation } from "expo-router";
 
 const Header = () => {
@@ -22,7 +22,7 @@ const Header = () => {
   );
 };
 
-export const HeaderWithBack = ({ title = "" }) => {
+export const HeaderWithBack = ({ title = "", bigTitle = false }) => {
   const { goBack } = useNavigation();
   return (
     <View className="py-2 px-2 gap-4">
@@ -30,21 +30,25 @@ export const HeaderWithBack = ({ title = "" }) => {
         <Pressable onPress={() => goBack()} className="rounded-md p-1.5">
           <ChevronLeft size={28} className="text-black" />
         </Pressable>
-        {/* <Text style={{ fontFamily: "Nunito_700Bold" }} className="text-base">
-          {title}
-        </Text> */}
+        {!bigTitle && (
+          <Text style={{ fontFamily: "Nunito_700Bold" }} className="text-base">
+            {title}
+          </Text>
+        )}
         <Pressable className="rounded-md p-1.5">
-          <MoreVertical className="text-black" />
+          <Plus size={28} className="text-black" />
         </Pressable>
       </View>
-      <View className="px-2">
-        <Text
-          style={{ fontFamily: "Nunito_700Bold" }}
-          className="font-bold text-2xl tracking-wider"
-        >
-          {title}
-        </Text>
-      </View>
+      {bigTitle && (
+        <View className="px-2">
+          <Text
+            style={{ fontFamily: "Nunito_700Bold" }}
+            className="font-bold text-2xl tracking-wider"
+          >
+            {title}
+          </Text>
+        </View>
+      )}
     </View>
   );
 };
