@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, Text, View } from "../../utils/ReactTailwind";
+import { Pressable, Text, View } from "@/utils/ReactTailwind";
 import { ChevronLeft, MoreVertical, Plus } from "lucide-react-native";
 import { useNavigation } from "expo-router";
 

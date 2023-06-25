@@ -8,9 +8,9 @@ import {
 } from "@expo-google-fonts/inter";
 import { Poppins_700Bold } from "@expo-google-fonts/poppins";
 import { Nunito_500Medium, Nunito_700Bold } from "@expo-google-fonts/nunito";
-import { SafeAreaView } from "../src/utils/ReactTailwind";
+import { SafeAreaView } from "@/utils/ReactTailwind";
 import { Provider } from "react-redux";
-import store from "../src/redux";
+import store from "@/redux";
 
 export const unstable_settings = {
   initialRouteName: "index",

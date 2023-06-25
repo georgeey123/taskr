@@ -1,9 +1,9 @@
-import { Text, View } from "../src/utils/ReactTailwind";
-import Header from "../src/components/layout/header";
+import { Text, View } from "@/utils/ReactTailwind";
+import Header from "@/components/layout/header";
 import { FlatList, Pressable } from "react-native";
-import ListItem from "../src/components/main/listItem";
+import ListItem from "@/components/main/listItem";
 import { useRouter } from "expo-router";
-import { useAppSelector } from "../src/hooks";
+import { useAppSelector } from "@/hooks";
 
 export default function Page() {
   const router = useRouter();

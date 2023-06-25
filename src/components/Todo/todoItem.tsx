@@ -1,9 +1,9 @@
 import React from "react";
-import { Pressable, Text, View } from "../../utils/ReactTailwind";
+import { Pressable, Text, View } from "@/utils/ReactTailwind";
 import classNames from "classnames";
-import { ITodo } from "../../types";
-import { useAppDispatch } from "../../hooks";
-import { action } from "../../redux";
+import { ITodo } from "@/types";
+import { useAppDispatch } from "@/hooks";
+import { action } from "@/redux";
 
 const TodoItem = ({ todo }: { todo: ITodo }) => {
   const dispatch = useAppDispatch();

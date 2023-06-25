@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { nanoid } from "@reduxjs/toolkit";
-import { IList } from "../types";
+import { IList } from "@/types";
 
 type initialStateType = {
   Lists: IList[];

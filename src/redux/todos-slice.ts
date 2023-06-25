@@ -1,5 +1,5 @@
 import { createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit";
-import { ITodo } from "../types";
+import { ITodo } from "@/types";
 
 type initialStateType = {
   Todos: ITodo[];

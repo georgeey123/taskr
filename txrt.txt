@@ -1,0 +1,24 @@
+Unable to resolve module @/utils/ReactTailwind from /Users/tesla/PROJECTS/taskr/app/[listId]/add_todo.tsx: @/utils/ReactTailwind could not be found within the project or in these directories:
+  node_modules
+  1 | import React, { useState } from "react";
+> 2 | import { Text, View, TextInput, Pressable } from "@/utils/ReactTailwind";
+    |                                                   ^
+  3 | import classNames from "classnames";
+  4 | import { SCREEN_WIDTH } from "@/constants";
+  5 | import { KeyboardAvoidingView, Platform } from "react-native";
+
+ABI48_0_0RCTFatal
+__37-[ABI48_0_0RCTCxxBridge handleError:]_block_invoke
+_dispatch_call_block_and_release
+_dispatch_client_callout
+_dispatch_main_queue_drain
+_dispatch_main_queue_callback_4CF
+__CFRUNLOOP_IS_SERVICING_THE_MAIN_DISPATCH_QUEUE__
+__CFRunLoopRun
+CFRunLoopRunSpecific
+GSEventRunModal
+-[UIApplication _run]
+UIApplicationMain
+main
+start_sim
+0x0

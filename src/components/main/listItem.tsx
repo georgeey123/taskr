@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { MoreVertical } from "lucide-react-native";
-import { Text, View } from "../../utils/ReactTailwind";
+import { Text, View } from "@/utils/ReactTailwind";
 import { Pressable } from "react-native";
 import { Link } from "expo-router";
 import classNames from "classnames";
-import { IList } from "../../types";
+import { IList } from "@/types";
 
 const ListItem = ({ list }: { list: IList }) => {
   const [isPressing, setIsPressing] = useState(false);

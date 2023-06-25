@@ -1,10 +1,10 @@
 import React from "react";
-import { View } from "../../src/utils/ReactTailwind";
+import { View } from "@/utils/ReactTailwind";
 import { useSearchParams } from "expo-router";
-import { HeaderWithBack } from "../../src/components/layout/header";
-import TodoItem from "../../src/components/Todo/todoItem";
+import { HeaderWithBack } from "@/components/layout/header";
+import TodoItem from "@/components/Todo/todoItem";
 import { FlatList } from "react-native";
-import { useAppSelector } from "../../src/hooks";
+import { useAppSelector } from "@/hooks";
 
 const Lists = () => {
   const { listId } = useSearchParams();
