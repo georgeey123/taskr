@@ -9,3 +9,8 @@ export type ITodo = {
   title: string;
   isDone: boolean;
 };
+
+export type IUser = {
+  id: string;
+  username: string;
+};
