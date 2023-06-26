@@ -14,7 +14,7 @@ const AddTodo = () => {
   const dispatch = useAppDispatch();
 
   return (
-    <View className="flex-1 items-center justify-center bg-black/5">
+    <View className="flex-1 items-center justify-center">
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1, alignItems: "center", justifyContent: "center" }}

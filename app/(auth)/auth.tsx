@@ -27,7 +27,7 @@ const Auth = () => {
         <View>
           <Pressable
             onPress={() => router.push("/login")}
-            className="w-[250px] h-14 items-center justify-center bg-slate-500 rounded-3xl"
+            className="w-[250px] h-14 items-center justify-center bg-sky-500 rounded-3xl"
           >
             <Text className="text-white text-xl font-semibold">Login</Text>
           </Pressable>

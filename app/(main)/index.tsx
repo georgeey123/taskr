@@ -29,6 +29,5 @@ export default function Page() {
         onPress={() => router.push("add_list")}
       />
     </View>
-    // </SafeAreaView>
   );
 }
