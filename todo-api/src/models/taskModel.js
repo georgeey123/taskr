@@ -6,6 +6,11 @@ const taskSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
+  listId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'List',
+    required: true,
+  },
   title: {
     type: String,
     required: true,
