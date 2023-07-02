@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const taskRoutes = require('./src/routes/taskRoutes');
 const userRoutes = require('./src/routes/userRoutes');
 const authRoutes = require('./src/routes/authRoutes');
+const listRoutes = require('./src/routes/listRoutes');
 
 const WhichUser = require('./src/middlewares/jwt');
 
@@ -13,6 +14,7 @@ app.use(express.json());
 
 app.use('/api/tasks', WhichUser, taskRoutes);
 app.use('/api/users', WhichUser, userRoutes);
+app.use('/api/lists', WhichUser, listRoutes);
 app.use('/api/auth', authRoutes)
 
 const mongoDBUrl = process.env.MONGODB_CONNECTION_URI;
