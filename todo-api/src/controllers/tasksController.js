@@ -2,19 +2,28 @@ const Task = require('../models/taskModel');
 
 const tasksController = {
   getAllTasks: async (req, res) => {
+    const { listId } = req.query;
+
     try {
-      const tasks = await Task.find({ userId: req.user.id });
-      res.json(tasks);
+
+      if (listId) {
+        const tasks = await Task.find({ userId: req.user.id, listId });
+        return res.json(tasks);
+      } else {
+        const tasks = await Task.find({ userId: req.user.id });
+        return res.json(tasks);
+      }
+
     } catch (error) {
       res.status(500).json({ error: 'Failed to fetch tasks' });
     }
   },
-
+  
   createTask: async (req, res) => {
-    const { title, completed, userId } = req.body;
+    const { title, completed, listId } = req.body;
 
     try {
-      const task = await Task.create({ title, completed, userId});
+      const task = await Task.create({ title, completed, listId, userId: req.user.id});
       res.status(201).json(task);
     } catch (error) {
       res.status(500).json({ error: 'Failed to create task' });
@@ -39,12 +48,12 @@ const tasksController = {
 
   updateTask: async (req, res) => {
     const { taskId } = req.params;
-    const { title, description, completed } = req.body;
+    const { title, listId, completed } = req.body;
 
     try {
       const task = await Task.findOneAndUpdate(
         { _id: taskId, userId: req.user.id },
-        { title, description, completed },
+        { title, listId, completed },
         { new: true }
       );
       
