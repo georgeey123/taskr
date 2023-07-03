@@ -1,16 +1,25 @@
 const Task = require('../models/taskModel');
+const List = require('../models/listModel');
 
 const tasksController = {
   getAllTasks: async (req, res) => {
     const { listId } = req.query;
 
     try {
+      const temporary_Tasks = []
+
+      const lists = await List.find({ userId: req.user.id });
+
+      for (const list of lists) {
+        const userTasks = await Task.find({ listId: list._id });
+        temporary_Tasks.push(...userTasks);
+      }
 
       if (listId) {
-        const tasks = await Task.find({ userId: req.user.id, listId });
+        const tasks = temporary_Tasks.filter((task) => task.listId == listId);
         return res.json(tasks);
       } else {
-        const tasks = await Task.find({ userId: req.user.id });
+        const tasks = temporary_Tasks;
         return res.json(tasks);
       }
 
@@ -23,7 +32,7 @@ const tasksController = {
     const { title, completed, listId } = req.body;
 
     try {
-      const task = await Task.create({ title, completed, listId, userId: req.user.id});
+      const task = await Task.create({ title, completed, listId });
       res.status(201).json(task);
     } catch (error) {
       res.status(500).json({ error: 'Failed to create task' });
@@ -34,7 +43,7 @@ const tasksController = {
     const { taskId } = req.params;
 
     try {
-      const task = await Task.findOne({ _id: taskId, userId: req.user.id });
+      const task = await Task.findOne({ _id: taskId });
       
       if (!task) {
         return res.status(404).json({ error: 'Task not found' });
@@ -52,7 +61,7 @@ const tasksController = {
 
     try {
       const task = await Task.findOneAndUpdate(
-        { _id: taskId, userId: req.user.id },
+        { _id: taskId },
         { title, listId, completed },
         { new: true }
       );
@@ -71,7 +80,7 @@ const tasksController = {
     const { taskId } = req.params;
 
     try {
-      const task = await Task.findOneAndDelete({ _id: taskId, userId: req.user.id });
+      const task = await Task.findOneAndDelete({ _id: taskId });
       
       if (!task) {
         return res.status(404).json({ error: 'Task not found' });
