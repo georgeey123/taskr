@@ -6,12 +6,15 @@ import { Pressable, Text, TextInput, View } from "@/utils/ReactTailwind";
 import classNames from "classnames";
 import { useRouter } from "expo-router";
 import { ChevronLeft } from "lucide-react-native";
-import React from "react";
+import React, { useState } from "react";
 import { KeyboardAvoidingView, Platform } from "react-native";
 
 const Login = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <View className="relative flex-1 items-center justify-center">
       <View className="absolute top-0 left-0 p-3 ">
@@ -39,16 +42,16 @@ const Login = () => {
             <TextInput
               className="text-lg"
               placeholder="Email"
-              // value={title}
-              // onChangeText={(text) => setTitle(text)}
+              value={email}
+              onChangeText={(text) => setEmail(text)}
             />
           </View>
           <View className="h-12 pl-4 mb-4 flex-row items-center border border-slate-300 rounded-md ">
             <TextInput
               className="text-lg"
               placeholder="Password"
-              // value={title}
-              // onChangeText={(text) => setTitle(text)}
+              value={password}
+              onChangeText={(text) => setPassword(text)}
             />
           </View>
           <Pressable

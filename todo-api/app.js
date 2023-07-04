@@ -20,7 +20,7 @@ app.use('/api/auth', authRoutes)
 const mongoDBUrl = process.env.MONGODB_CONNECTION_URI;
 
 mongoose
-  .connect(mongoDBUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(mongoDBUrl, { useUnifiedTopology: true })
   .then(() => {
     console.log('Connected to MongoDB');
     const port = process.env.PORT || 3000;
