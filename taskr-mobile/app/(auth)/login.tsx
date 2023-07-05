@@ -42,12 +42,14 @@ const Login = () => {
     try {
       setLoading(true);
       const { data } = await login(formData);
-      dispatch(action.auth.setAccessToken(data.accessToken));
-      dispatch(action.auth.setIsAuthenticated(true));
       dispatch(
-        action.auth.setUser({
-          id: "1",
-          username: "test",
+        action.auth.setAuth({
+          accessToken: data.accessToken,
+          user: {
+            id: "1",
+            username: "test",
+          },
+          isAuthenticated: true,
         })
       );
     } catch (err) {

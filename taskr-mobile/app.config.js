@@ -17,6 +17,7 @@ module.exports = {
   assetBundlePatterns: ["**/*"],
   ios: {
     supportsTablet: true,
+    usesNonExemptEncryption: false,
   },
   android: {
     adaptiveIcon: {

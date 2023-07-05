@@ -1,5 +1,7 @@
+import { TASKR_AUTH } from "@/constants";
 import { IUser } from "@/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import * as SecureStore from "expo-secure-store";
 
 type initialStateType = {
   isAuthenticated: boolean;
@@ -17,6 +19,12 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    setAuth(state, action: PayloadAction<initialStateType>) {
+      state.user = action.payload.user;
+      state.accessToken = action.payload.accessToken;
+      state.isAuthenticated = action.payload.isAuthenticated;
+      SecureStore.setItemAsync(TASKR_AUTH, JSON.stringify(action.payload));
+    },
     setAccessToken(state, action: PayloadAction<string | null>) {
       state.accessToken = action.payload;
     },

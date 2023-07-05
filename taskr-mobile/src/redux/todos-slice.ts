@@ -1,42 +1,38 @@
 import { createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit";
-import { ITodo } from "@/types";
+import { ITask } from "@/types";
 
 type initialStateType = {
-  Todos: ITodo[];
+  Todos: ITask[];
 };
 
 const initialState: initialStateType = {
-  Todos: [
-    {
-      id: "vj_yKQd2QWWzDkjs77wbn",
-      listID: "wQy3AuaBlBut7rmq6oJUa",
-      title: "Learn React",
-      isDone: false,
-    },
-    {
-      id: "vj_yKQd2QWWzDkds77wbn",
-      listID: "wQy3AuaBlBut7rmq6oJUa",
-      title: "Learn Tailwind",
-      isDone: true,
-    },
-    {
-      id: "vj_yKQd2QWszDkjs77wbn",
-      listID: "wQy3AuaBlBut7rmq6oJUa",
-      title: "Take Ohemaa Out",
-      isDone: false,
-    },
-  ],
+  Todos: [],
 };
 
 const todosSlice = createSlice({
   name: "todos",
   initialState,
   reducers: {
-    setTodos(state, action: PayloadAction<ITodo[]>) {
+    addTodos(state, action: PayloadAction<ITask[]>) {
+      let oldTodos = state.Todos;
+      for (const todo of action.payload) {
+        if (!state.Todos.find((item) => item._id === todo._id)) {
+          oldTodos.push(todo);
+          state.Todos = oldTodos;
+        } else {
+          state.Todos = state.Todos.map((item) =>
+            item._id === todo._id ? todo : item
+          );
+        }
+      }
+    },
+    setTodos(state, action: PayloadAction<ITask[]>) {
+      console.log("something");
+
       state.Todos = action.payload;
     },
     addTodo(state, action: PayloadAction<{ title: string; listID: string }>) {
-      const newTodo: ITodo = {
+      const newTodo: ITask = {
         id: nanoid(),
         listID: action.payload.listID,
         title: action.payload.title,

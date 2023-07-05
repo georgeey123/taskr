@@ -16,7 +16,7 @@ const ListItem = ({ list }: { list: IList }) => {
         isPressing ? "border-slate-600 bg-zinc-100" : "border-slate-300"
       )}
     >
-      <Link href={`/${list.id}`} asChild>
+      <Link href={`/${list._id}`} asChild>
         <Pressable
           onPressIn={() => setIsPressing(true)}
           onPressOut={() => setIsPressing(false)}

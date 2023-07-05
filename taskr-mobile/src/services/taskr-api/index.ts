@@ -1,5 +1,5 @@
 import useAxiosAuth from "@/hooks/useAxiosAuth";
-import { IAuthResponse } from "@/types";
+import { IAuthResponse, IList, ITask } from "@/types";
 
 const useTaskrAPI = () => {
   const axios = useAxiosAuth();
@@ -26,8 +26,12 @@ const useTaskrAPI = () => {
     }
   }
 
-  function getTasks() {}
-  function getLists() {}
+  function getTasks(listId: string) {
+    return axios.get<ITask[]>(`/tasks?listId=${listId}`);
+  }
+  function getLists() {
+    return axios.get<IList[]>("/lists");
+  }
   function getUserDetails() {}
   function getTask() {}
   function getList() {}

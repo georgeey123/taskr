@@ -1,10 +1,12 @@
 export type IList = {
-  id: string;
+  id?: string;
+  _id?: string;
   title: string;
 };
 
-export type ITodo = {
-  id: string;
+export type ITask = {
+  id?: string;
+  _id?: string;
   listID: string;
   title: string;
   isDone: boolean;
