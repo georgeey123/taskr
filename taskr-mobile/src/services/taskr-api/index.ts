@@ -35,7 +35,11 @@ const useTaskrAPI = () => {
   function getUserDetails() {}
   function getTask() {}
   function getList() {}
-  function toggleTask() {}
+  function toggleTask(taskId: string, completed: boolean) {
+    return axios.patch(`/tasks/${taskId}`, {
+      completed: !completed,
+    });
+  }
   function updateTask() {}
   function updateList() {}
 

@@ -7,9 +7,9 @@ export type IList = {
 export type ITask = {
   id?: string;
   _id?: string;
-  listID: string;
+  listId: string;
   title: string;
-  isDone: boolean;
+  completed: boolean;
 };
 
 export type IUser = {

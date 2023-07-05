@@ -31,12 +31,12 @@ const todosSlice = createSlice({
 
       state.Todos = action.payload;
     },
-    addTodo(state, action: PayloadAction<{ title: string; listID: string }>) {
+    addTodo(state, action: PayloadAction<{ title: string; listId: string }>) {
       const newTodo: ITask = {
         id: nanoid(),
-        listID: action.payload.listID,
+        listId: action.payload.listId,
         title: action.payload.title,
-        isDone: false,
+        completed: false,
       };
       state.Todos = [newTodo, ...state.Todos];
     },
@@ -52,7 +52,9 @@ const todosSlice = createSlice({
     },
     toggleTodo(state, action: PayloadAction<string>) {
       state.Todos = state.Todos.map((todo) =>
-        todo.id === action.payload ? { ...todo, isDone: !todo.isDone } : todo
+        todo._id === action.payload
+          ? { ...todo, completed: !todo.completed }
+          : todo
       );
     },
   },

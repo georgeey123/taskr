@@ -23,16 +23,13 @@ const Lists = () => {
     queryKey: ["todos", listId],
     queryFn: () => getApiTasks(listId as string),
     onSuccess: ({ data }) => {
-      console.log("dispatch", data);
       dispatch(action.todos.addTodos(data));
     },
   });
 
-  const ListTodos = Todos.filter((todo) => todo.listID === listId);
-  console.log("listTodos", ListTodos);
-
-  const ListTodosDone = ListTodos.filter((todo) => todo.isDone);
-  const ListTodosNotDone = ListTodos.filter((todo) => !todo.isDone);
+  const ListTodos = Todos.filter((todo) => todo.listId === listId);
+  const ListTodosDone = ListTodos.filter((todo) => todo.completed);
+  const ListTodosNotDone = ListTodos.filter((todo) => !todo.completed);
 
   if (SelectedList === undefined) {
     return (
