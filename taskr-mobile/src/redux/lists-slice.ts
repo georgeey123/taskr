@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { nanoid } from "@reduxjs/toolkit";
 import { IList } from "@/types";
 
 type initialStateType = {
@@ -27,12 +26,8 @@ const listsSlice = createSlice({
     setLists(state, action: PayloadAction<IList[]>) {
       state.Lists = action.payload;
     },
-    addList(state, action: PayloadAction<string>) {
-      const title = action.payload;
-      const newList = {
-        id: nanoid(),
-        title,
-      };
+    addList(state, action: PayloadAction<IList>) {
+      const newList = action.payload;
       state.Lists.push(newList);
     },
     updateList(state, action: PayloadAction<IList>) {

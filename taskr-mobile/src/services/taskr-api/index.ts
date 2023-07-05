@@ -42,6 +42,11 @@ const useTaskrAPI = () => {
   }
   function updateTask() {}
   function updateList() {}
+  function postList(listTitle: string) {
+    return axios.post<IList>("/lists", {
+      title: listTitle,
+    });
+  }
 
   return {
     login,
@@ -54,6 +59,7 @@ const useTaskrAPI = () => {
     toggleTask,
     updateTask,
     updateList,
+    postList,
   };
 };
 
