@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const morgan = require('morgan');
 const taskRoutes = require('./src/routes/taskRoutes');
 const userRoutes = require('./src/routes/userRoutes');
 const authRoutes = require('./src/routes/authRoutes');
@@ -11,6 +12,7 @@ const WhichUser = require('./src/middlewares/jwt');
 const app = express();
 
 app.use(express.json());
+app.use(morgan("tiny"));
 
 app.use('/api/tasks', WhichUser, taskRoutes);
 app.use('/api/users', WhichUser, userRoutes);

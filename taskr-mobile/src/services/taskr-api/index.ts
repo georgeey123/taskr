@@ -1,47 +1,52 @@
 import useAxiosAuth from "@/hooks/useAxiosAuth";
 import { IAuthResponse } from "@/types";
 
-class TaskrAPI {
-  private axios = useAxiosAuth();
+const useTaskrAPI = () => {
+  const axios = useAxiosAuth();
 
-  public async login(data: { email: string; password: string }) {
+  async function login(data: { email: string; password: string }) {
     try {
-      const response = await this.axios.post<IAuthResponse>(
-        "/auth/login",
-        data
-      );
+      const response = await axios.post<IAuthResponse>("/auth/login", data);
       return response;
     } catch (error) {
       throw error;
     }
   }
 
-  public async register(data: {
+  async function register(data: {
     name: string;
     email: string;
     password: string;
   }) {
     try {
-      const response = await this.axios.post<IAuthResponse>(
-        "/auth/register",
-        data
-      );
+      const response = await axios.post<IAuthResponse>("/auth/register", data);
       return response;
     } catch (error) {
       throw error;
     }
   }
 
-  public async getTasks() {}
-  public async getLists() {}
-  public async getUserDetails() {}
-  public async getTask() {}
-  public async getList() {}
-  public async toggleTask() {}
-  public async updateTask() {}
-  public async updateList() {}
-}
+  function getTasks() {}
+  function getLists() {}
+  function getUserDetails() {}
+  function getTask() {}
+  function getList() {}
+  function toggleTask() {}
+  function updateTask() {}
+  function updateList() {}
 
-const useTaskrAPI = new TaskrAPI();
+  return {
+    login,
+    register,
+    getTasks,
+    getLists,
+    getUserDetails,
+    getTask,
+    getList,
+    toggleTask,
+    updateTask,
+    updateList,
+  };
+};
 
 export default useTaskrAPI;
