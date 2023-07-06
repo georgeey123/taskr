@@ -1,4 +1,4 @@
-import { createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ITask } from "@/types";
 
 type initialStateType = {
@@ -27,17 +27,10 @@ const todosSlice = createSlice({
       }
     },
     setTodos(state, action: PayloadAction<ITask[]>) {
-      console.log("something");
-
       state.Todos = action.payload;
     },
-    addTodo(state, action: PayloadAction<{ title: string; listId: string }>) {
-      const newTodo: ITask = {
-        id: nanoid(),
-        listId: action.payload.listId,
-        title: action.payload.title,
-        completed: false,
-      };
+    addTodo(state, action: PayloadAction<ITask>) {
+      const newTodo: ITask = action.payload;
       state.Todos = [newTodo, ...state.Todos];
     },
     updateTodo(state, action: PayloadAction<{ id: string; title: string }>) {

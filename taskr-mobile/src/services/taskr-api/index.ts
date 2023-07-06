@@ -47,6 +47,9 @@ const useTaskrAPI = () => {
       title: listTitle,
     });
   }
+  function postTask(data: { listId: string; title: string }) {
+    return axios.post<ITask>("/tasks", data);
+  }
 
   return {
     login,
@@ -60,6 +63,7 @@ const useTaskrAPI = () => {
     updateTask,
     updateList,
     postList,
+    postTask,
   };
 };
 

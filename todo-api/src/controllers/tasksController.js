@@ -29,10 +29,10 @@ const tasksController = {
   },
   
   createTask: async (req, res) => {
-    const { title, completed, listId } = req.body;
+    const { title, listId } = req.body;
 
     try {
-      const task = await Task.create({ title, completed, listId });
+      const task = await Task.create({ title, completed: false, listId });
       res.status(201).json(task);
     } catch (error) {
       res.status(500).json({ error: 'Failed to create task' });
