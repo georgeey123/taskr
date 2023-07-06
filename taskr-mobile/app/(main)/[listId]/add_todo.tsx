@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Text, View, TextInput, Pressable } from "@/utils/ReactTailwind";
 import classNames from "classnames";
 import { SCREEN_WIDTH } from "@/constants";
@@ -19,7 +19,6 @@ type AddTaskFormData = {
 };
 
 const AddTodo = () => {
-  const [title, setTitle] = useState("");
   const router = useRouter();
   const { listId } = useSearchParams();
   const dispatch = useAppDispatch();
