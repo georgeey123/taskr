@@ -31,7 +31,7 @@ const HeaderWithBack = ({
         )}
         <IconButton
           Icon={Plus}
-          onPress={() => router.push(`/${List.id}/add_todo`)}
+          onPress={() => router.push(`/${List._id}/add_todo`)}
           size={28}
           iconClassName="text-black"
           className="rounded-md p-1.5"

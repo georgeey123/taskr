@@ -1,32 +1,33 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { nanoid } from "@reduxjs/toolkit";
 import { IList } from "@/types";
 
 type initialStateType = {
+  isLoaded: boolean;
   Lists: IList[];
 };
 
 const initialState: initialStateType = {
-  Lists: [
-    { id: "wQy3AuaBlBut7rmq6oJUa", title: "💀 My Super List" },
-    { id: "u-rfUIKLqcDm-oY6vfU93", title: "🙈 Wants & Needs" },
-    { id: "iA0zSAXLvCO3JWIUvlKhE", title: "Super Cars" },
-  ],
+  isLoaded: false,
+  // Lists: [
+  //   { id: "wQy3AuaBlBut7rmq6oJUa", title: "💀 My Super List" },
+  //   { id: "u-rfUIKLqcDm-oY6vfU93", title: "🙈 Wants & Needs" },
+  //   { id: "iA0zSAXLvCO3JWIUvlKhE", title: "Super Cars" },
+  // ],
+  Lists: [],
 };
 
 const listsSlice = createSlice({
   name: "lists",
   initialState,
   reducers: {
+    setIsLoaded(state, action: PayloadAction<boolean>) {
+      state.isLoaded = action.payload;
+    },
     setLists(state, action: PayloadAction<IList[]>) {
       state.Lists = action.payload;
     },
-    addList(state, action: PayloadAction<string>) {
-      const title = action.payload;
-      const newList = {
-        id: nanoid(),
-        title,
-      };
+    addList(state, action: PayloadAction<IList>) {
+      const newList = action.payload;
       state.Lists.push(newList);
     },
     updateList(state, action: PayloadAction<IList>) {

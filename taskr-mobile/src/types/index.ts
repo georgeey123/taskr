@@ -1,16 +1,25 @@
 export type IList = {
-  id: string;
+  id?: string;
+  _id?: string;
   title: string;
 };
 
-export type ITodo = {
-  id: string;
-  listID: string;
+export type ITask = {
+  id?: string;
+  _id?: string;
+  listId: string;
   title: string;
-  isDone: boolean;
+  completed: boolean;
 };
 
 export type IUser = {
   id: string;
   username: string;
 };
+
+export type IAuthResponse = {
+  expiresIn: string;
+  accessToken: string;
+};
+
+export type IAuthRegisterResponse = {};

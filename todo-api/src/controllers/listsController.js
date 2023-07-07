@@ -16,6 +16,7 @@ const listController = {
       const list = await List.create({ title, userId: req.user.id });
       res.status(201).json(list);
     } catch (error) {
+      console.log(error);
       res.status(500).json({ error: 'Failed to create list' });
     }
   },

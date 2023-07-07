@@ -1,4 +1,5 @@
 import { Slot } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
 import {
   useFonts,
   Inter_400Regular,
@@ -11,10 +12,16 @@ import { Nunito_500Medium, Nunito_700Bold } from "@expo-google-fonts/nunito";
 import { Provider } from "react-redux";
 import store from "@/redux";
 import AuthProvider from "./(authProvider)";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import InitializerProvider from "./(InitializerProvider)";
 
 export const unstable_settings = {
   initialRouteName: "index",
 };
+
+const queryClient = new QueryClient();
+
+SplashScreen.preventAutoHideAsync();
 
 export default function Layout() {
   let [fontsLoaded] = useFonts({
@@ -32,10 +39,14 @@ export default function Layout() {
   }
 
   return (
-    <Provider store={store}>
-      <AuthProvider>
-        <Slot />
-      </AuthProvider>
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <InitializerProvider>
+          <AuthProvider>
+            <Slot />
+          </AuthProvider>
+        </InitializerProvider>
+      </Provider>
+    </QueryClientProvider>
   );
 }

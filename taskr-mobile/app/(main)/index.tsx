@@ -1,25 +1,48 @@
 import { View } from "@/utils/ReactTailwind";
-import { FlatList } from "react-native";
+import { ActivityIndicator, FlatList } from "react-native";
 import ListItem from "@/components/main/listItem";
 import { useRouter } from "expo-router";
-import { useAppSelector } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 import { Plus } from "lucide-react-native";
 import { Header } from "@/components/layout/headers";
 import { IconButton } from "@/components/buttons";
+import { useQuery } from "@tanstack/react-query";
+import useTaskrAPI from "@/services/taskr-api";
+import { action } from "@/redux";
 
 export default function Page() {
   const router = useRouter();
+  const { isAuthenticated } = useAppSelector((state) => state.auth);
   const { Lists } = useAppSelector((state) => state.lists);
+  const dispatch = useAppDispatch();
+  const { getLists } = useTaskrAPI();
+
+  const { isLoading, isSuccess } = useQuery({
+    enabled: isAuthenticated,
+    queryKey: ["lists"],
+    queryFn: getLists,
+    onSuccess: (data) => {
+      dispatch(action.lists.setLists(data.data));
+    },
+  });
+
   return (
     <View className="flex-1">
       <Header />
       <View className="relative flex-1 px-4 pb-4 gap-2">
-        <FlatList
-          style={{ paddingBottom: 200 }}
-          data={Lists}
-          renderItem={({ item }) => <ListItem list={item} />}
-          keyExtractor={(item) => item.id}
-        ></FlatList>
+        {isLoading && (
+          <View className="flex-1 items-center justify-center">
+            <ActivityIndicator size="large" color="#000" />
+          </View>
+        )}
+        {isSuccess && (
+          <FlatList
+            style={{ paddingBottom: 200 }}
+            data={Lists}
+            renderItem={({ item }) => <ListItem list={item} />}
+            keyExtractor={(item) => item._id}
+          ></FlatList>
+        )}
       </View>
       <IconButton
         Icon={Plus}
