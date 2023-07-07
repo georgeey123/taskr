@@ -5,7 +5,7 @@ const { getLists, postList, updateList ,deleteList, getListById } = require("../
 router.get('/', getLists);
 router.post('/', postList);
 router.get('/:listId', getListById)
-router.put('/:listId', updateList);
+router.patch('/:listId', updateList);
 router.delete('/:listId', deleteList);
 
 module.exports = router;
