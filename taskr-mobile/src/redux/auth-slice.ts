@@ -25,6 +25,12 @@ const authSlice = createSlice({
       state.isAuthenticated = action.payload.isAuthenticated;
       SecureStore.setItemAsync(TASKR_AUTH, JSON.stringify(action.payload));
     },
+    Logout(state) {
+      state.user = null;
+      state.accessToken = null;
+      state.isAuthenticated = false;
+      SecureStore.deleteItemAsync(TASKR_AUTH);
+    },
     setAccessToken(state, action: PayloadAction<string | null>) {
       state.accessToken = action.payload;
     },

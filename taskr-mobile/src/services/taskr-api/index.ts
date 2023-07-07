@@ -19,7 +19,7 @@ const useTaskrAPI = () => {
     password: string;
   }) {
     try {
-      const response = await axios.post<IAuthResponse>("/auth/register", data);
+      const response = await axios.post<IAuthResponse>("/auth/signup", data);
       return response;
     } catch (error) {
       throw error;
