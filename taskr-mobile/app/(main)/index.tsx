@@ -29,7 +29,7 @@ export default function Page() {
   return (
     <View className="flex-1">
       <Header />
-      <View className="relative flex-1 px-4 pb-4 gap-2">
+      <View className="relative flex-1 px-4 pb-4 gap-2 z-0">
         {isLoading && (
           <View className="flex-1 items-center justify-center">
             <ActivityIndicator size="large" color="#000" />

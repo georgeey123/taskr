@@ -14,6 +14,7 @@ import store from "@/redux";
 import AuthProvider from "./(authProvider)";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import InitializerProvider from "./(InitializerProvider)";
+import { ClickOutsideProvider } from "react-native-click-outside";
 
 export const unstable_settings = {
   initialRouteName: "index",
@@ -43,7 +44,9 @@ export default function Layout() {
       <Provider store={store}>
         <InitializerProvider>
           <AuthProvider>
-            <Slot />
+            <ClickOutsideProvider>
+              <Slot />
+            </ClickOutsideProvider>
           </AuthProvider>
         </InitializerProvider>
       </Provider>
