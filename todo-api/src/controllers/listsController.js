@@ -1,4 +1,5 @@
 const List = require('../models/listModel');
+const Tasks = require('../models/taskModel');
 
 const listController = {
   getLists: async (req, res) => {
@@ -60,6 +61,7 @@ const listController = {
 
     try {
       const list = await List.findOneAndDelete({ _id: listId, userId: req.user.id });
+      await Tasks.deleteMany({ listId: listId });
       
       if (!list) {
         return res.status(404).json({ error: 'List not found' });

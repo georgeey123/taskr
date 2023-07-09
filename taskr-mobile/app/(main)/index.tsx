@@ -56,7 +56,9 @@ export default function Page() {
         size={32}
         iconClassName="text-white"
         className="absolute bottom-6 right-6 w-16 h-16 bg-sky-500 items-center justify-center rounded-full"
-        onPress={() => router.push("add_list")}
+        onPress={() => {
+          router.push("/add_list?listId=");
+        }}
       />
     </View>
   );

@@ -29,26 +29,36 @@ const useTaskrAPI = () => {
   function getTasks(listId: string) {
     return axios.get<ITask[]>(`/tasks?listId=${listId}`);
   }
+
   function getLists() {
     return axios.get<IList[]>("/lists");
   }
-  function getUserDetails() {}
-  function getTask() {}
-  function getList() {}
+
   function toggleTask(taskId: string, completed: boolean) {
     return axios.patch(`/tasks/${taskId}`, {
       completed: !completed,
     });
   }
   function updateTask() {}
-  function updateList() {}
+
+  function updateList(listId: string, listTitle: string) {
+    return axios.put<IList>(`/lists/${listId}`, {
+      title: listTitle,
+    });
+  }
+
   function postList(listTitle: string) {
     return axios.post<IList>("/lists", {
       title: listTitle,
     });
   }
+
   function postTask(data: { listId: string; title: string }) {
     return axios.post<ITask>("/tasks", data);
+  }
+
+  function deleteList(listId: string) {
+    return axios.delete(`/lists/${listId}`);
   }
 
   return {
@@ -56,14 +66,12 @@ const useTaskrAPI = () => {
     register,
     getTasks,
     getLists,
-    getUserDetails,
-    getTask,
-    getList,
     toggleTask,
     updateTask,
     updateList,
     postList,
     postTask,
+    deleteList,
   };
 };
 

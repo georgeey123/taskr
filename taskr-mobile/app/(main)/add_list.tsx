@@ -7,8 +7,8 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
-import { useRouter } from "expo-router";
-import { useAppDispatch } from "@/hooks";
+import { useNavigation, useRouter, useSearchParams } from "expo-router";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 import { action } from "@/redux";
 import useTaskrAPI from "@/services/taskr-api";
 import { useMutation } from "@tanstack/react-query";
@@ -19,9 +19,15 @@ type AddListFormData = {
 };
 
 const AddList = () => {
+  const { listId } = useSearchParams();
   const router = useRouter();
+  const navigation = useNavigation();
   const dispatch = useAppDispatch();
-  const { postList } = useTaskrAPI();
+  const Lists = useAppSelector((state) => state.lists.Lists);
+  const selectedList = Lists.find((list) => list._id === listId);
+  const { postList, updateList } = useTaskrAPI();
+
+  const isEditing = selectedList !== undefined;
 
   const {
     control,
@@ -29,15 +35,25 @@ const AddList = () => {
     formState: { errors },
   } = useForm<AddListFormData>({
     defaultValues: {
-      title: "",
+      title: isEditing ? selectedList?.title : "",
     },
   });
 
   const { mutate, isLoading, isError } = useMutation({
-    mutationKey: ["addList"],
-    mutationFn: (postTitle: string) => postList(postTitle),
+    mutationKey: ["Modify List", listId ?? "edit"],
+    mutationFn: (postTitle: string) => {
+      if (isEditing) {
+        return updateList(listId as string, postTitle);
+      } else {
+        return postList(postTitle);
+      }
+    },
     onSuccess({ data }) {
-      dispatch(action.lists.addList(data));
+      if (isEditing) {
+        dispatch(action.lists.updateList(data));
+      } else {
+        dispatch(action.lists.addList(data));
+      }
       router.back();
     },
   });
@@ -56,7 +72,9 @@ const AddList = () => {
             "p-4"
           )}
         >
-          <Text className="text-2xl mb-4">Add List</Text>
+          <Text className="text-2xl mb-4">
+            {isEditing ? "Edit" : "Add"} List
+          </Text>
 
           <View
             className={classNames(
@@ -85,7 +103,7 @@ const AddList = () => {
           <View className="flex-row w-full justify-between items-center">
             <Pressable
               className="h-14 flex-1 mr-2 items-center justify-center border border-red-500"
-              onPress={() => router.back()}
+              onPress={() => navigation.goBack()}
             >
               <Text className="text-xl font-semibold uppercase text-red-500">
                 Cancel
@@ -101,7 +119,7 @@ const AddList = () => {
                 <ActivityIndicator size="small" color="#000" />
               ) : (
                 <Text className="text-xl font-semibold uppercase text-slate-600">
-                  Add
+                  {isEditing ? "Edit" : "Add"}
                 </Text>
               )}
             </Pressable>
