@@ -1,6 +1,5 @@
 import React from "react";
 import { Text, View } from "@/utils/ReactTailwind";
-import { Pressable } from "react-native";
 import { useAppDispatch } from "@/hooks";
 import { action } from "@/redux";
 import Dropdown from "../dropdown";

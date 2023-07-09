@@ -9,6 +9,7 @@ import { IconButton } from "@/components/buttons";
 import { useQuery } from "@tanstack/react-query";
 import useTaskrAPI from "@/services/taskr-api";
 import { action } from "@/redux";
+import { RefreshControl } from "react-native-gesture-handler";
 
 export default function Page() {
   const router = useRouter();
@@ -17,7 +18,7 @@ export default function Page() {
   const dispatch = useAppDispatch();
   const { getLists } = useTaskrAPI();
 
-  const { isLoading, isSuccess } = useQuery({
+  const { isLoading, isSuccess, refetch } = useQuery({
     enabled: isAuthenticated,
     queryKey: ["lists"],
     queryFn: getLists,
@@ -38,6 +39,12 @@ export default function Page() {
         {isSuccess && (
           <FlatList
             style={{ paddingBottom: 200 }}
+            refreshControl={
+              <RefreshControl
+                refreshing={isLoading}
+                onRefresh={() => refetch()}
+              />
+            }
             data={Lists}
             renderItem={({ item }) => <ListItem list={item} />}
             keyExtractor={(item) => item._id}
