@@ -2,7 +2,6 @@ import { Pressable, Text, View } from "@/utils/ReactTailwind";
 import { LucideIcon, MoreVertical } from "lucide-react-native";
 import { IconButton } from "@/components/buttons";
 import { ComponentProps, createContext, useContext, useState } from "react";
-import { useClickOutside } from "react-native-click-outside";
 
 const ContextMenuContext = createContext({
   onClose: () => {},

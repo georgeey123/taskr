@@ -57,7 +57,7 @@ const DropdownItem = ({
         props.onPress && props.onPress(e);
         setIsOpen(false);
       }}
-      className="w-full h-12 rounded-md border border-slate-100 flex-row items-center justify-between px-4"
+      className="w-full h-12 rounded-md border border-slate-100 active:bg-slate-100 flex-row items-center justify-between px-4"
     >
       <Text className="text-lg text-slate-800">{title}</Text>
       {Icon && <Icon size={20} color={iconColor} />}
