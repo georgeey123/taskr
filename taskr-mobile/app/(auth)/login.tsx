@@ -6,7 +6,7 @@ import useTaskrAPI from "@/services/taskr-api";
 import { Pressable, Text, TextInput, View } from "@/utils/ReactTailwind";
 import { AxiosError } from "axios";
 import classNames from "classnames";
-import { useRouter } from "expo-router";
+import { useRouter, useNavigation } from "expo-router";
 import { ChevronLeft } from "lucide-react-native";
 import React, { useState } from "react";
 import {
@@ -23,6 +23,7 @@ type LoginFormData = {
 
 const Login = () => {
   const router = useRouter();
+  const navigation = useNavigation();
   const dispatch = useAppDispatch();
   const { login } = useTaskrAPI();
   const [loading, setLoading] = useState(false);
@@ -69,7 +70,13 @@ const Login = () => {
           Icon={ChevronLeft}
           size={32}
           iconClassName="text-black"
-          onPress={() => router.back()}
+          onPress={() => {
+            if (navigation.canGoBack()) {
+              router.back();
+            } else {
+              router.replace("/");
+            }
+          }}
         />
       </View>
       <KeyboardAvoidingView

@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, View } from "@/utils/ReactTailwind";
-import { useSearchParams } from "expo-router";
+import { useRouter, useSearchParams } from "expo-router";
 import TodoItem from "@/components/Todo/todoItem";
 import { ActivityIndicator, FlatList } from "react-native";
 import { useAppDispatch, useAppSelector } from "@/hooks";
@@ -8,8 +8,11 @@ import { HeaderWithBack } from "@/components/layout/headers";
 import { useQuery } from "@tanstack/react-query";
 import useTaskrAPI from "@/services/taskr-api";
 import { action } from "@/redux";
+import { IconButton } from "@/components/buttons";
+import { Plus } from "lucide-react-native";
 
 const Lists = () => {
+  const router = useRouter();
   const { listId } = useSearchParams();
   const { Lists } = useAppSelector((state) => state.lists);
   const { Todos } = useAppSelector((state) => state.todos);
@@ -70,6 +73,13 @@ const Lists = () => {
           </View>
         )}
       </View>
+      <IconButton
+        Icon={Plus}
+        size={32}
+        iconClassName="text-white"
+        className="absolute bottom-6 right-6 w-16 h-16 bg-sky-500 active:bg-sky-600 items-center justify-center rounded-full"
+        onPress={() => router.push(`/${SelectedList._id}/add_todo`)}
+      />
     </View>
   );
 };

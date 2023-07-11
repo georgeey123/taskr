@@ -33,7 +33,7 @@ const listsSlice = createSlice({
     updateList(state, action: PayloadAction<IList>) {
       const updateListItem = action.payload;
       state.Lists = state.Lists.map((list) => {
-        if (list.id === updateListItem.id) {
+        if (list._id === updateListItem._id) {
           return {
             ...list,
             ...updateListItem,
@@ -44,7 +44,7 @@ const listsSlice = createSlice({
     },
     deleteList(state, action: PayloadAction<string>) {
       const id = action.payload;
-      state.Lists = state.Lists.filter((list) => list.id !== id);
+      state.Lists = state.Lists.filter((list) => list._id !== id);
     },
   },
 });

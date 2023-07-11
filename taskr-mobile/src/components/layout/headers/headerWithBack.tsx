@@ -1,8 +1,13 @@
 import { Text, View } from "@/utils/ReactTailwind";
-import { ChevronLeft, Plus } from "lucide-react-native";
-import { useNavigation, useRouter } from "expo-router";
+import { ChevronLeft, Pencil, Trash } from "lucide-react-native";
+import { useNavigation, useRouter, useSearchParams } from "expo-router";
 import { IList } from "@/types";
 import { IconButton } from "@/components/buttons";
+import Dropdown from "../dropdown";
+import { useMutation } from "@tanstack/react-query";
+import useTaskrAPI from "@/services/taskr-api";
+import { useAppDispatch } from "@/hooks";
+import { action } from "@/redux";
 
 const HeaderWithBack = ({
   List,
@@ -11,15 +16,34 @@ const HeaderWithBack = ({
   List?: IList;
   bigTitle?: boolean;
 }) => {
-  const { goBack } = useNavigation();
+  const { goBack, canGoBack } = useNavigation();
   const router = useRouter();
+  const { listId } = useSearchParams();
+  const { deleteList } = useTaskrAPI();
+  const dispatch = useAppDispatch();
+
+  const { mutate } = useMutation({
+    mutationKey: ["delete"],
+    mutationFn: () => deleteList(listId as string),
+
+    onSuccess() {
+      dispatch(action.lists.deleteList(listId as string));
+      router.back();
+    },
+  });
 
   return (
-    <View className="py-2 px-2 gap-4">
+    <View className="py-2 px-2 gap-4 z-10">
       <View className="flex-row h-12 items-center justify-between">
         <IconButton
           Icon={ChevronLeft}
-          onPress={() => goBack()}
+          onPress={() => {
+            if (canGoBack()) {
+              goBack();
+            } else {
+              router.push("/");
+            }
+          }}
           size={28}
           iconClassName="text-black"
           className="rounded-md p-1.5"
@@ -29,13 +53,20 @@ const HeaderWithBack = ({
             {List.title}
           </Text>
         )}
-        <IconButton
-          Icon={Plus}
-          onPress={() => router.push(`/${List._id}/add_todo`)}
-          size={28}
-          iconClassName="text-black"
-          className="rounded-md p-1.5"
-        />
+        <Dropdown>
+          <Dropdown.Item
+            title="Edit"
+            onPress={() => {
+              router.push(`/add_list?listId=${List._id}`);
+            }}
+            Icon={Pencil}
+          />
+          <Dropdown.Item
+            title="Delete List"
+            Icon={Trash}
+            onPress={() => mutate()}
+          />
+        </Dropdown>
       </View>
       {bigTitle && (
         <View className="px-2">
