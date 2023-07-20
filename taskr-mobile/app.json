@@ -7,19 +7,13 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "extra": {
-      "eas": {
-        "projectId": "fe5bcfb2-99ba-42a1-ba72-33c8a827ce69"
-      }
-    },
+    "extra": {},
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "usesNonExemptEncryption": false
